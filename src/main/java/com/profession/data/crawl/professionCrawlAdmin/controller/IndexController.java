@@ -31,4 +31,15 @@ public class IndexController {
 	public String getIndexPath(){
 		return "index";
 	}
+	
+	/**
+	 * @Title: getWelcomePath
+	 * @Description: 进入欢迎页
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping("/welcome")
+	public String getWelcomePath(){
+		return "welcome";
+	}
 }
