@@ -8,7 +8,7 @@
  */
 package com.profession.data.crawl.professionCrawlAdmin.vo.request.crawlConfig;
 
-import com.profession.data.crawl.professionCrawlAdmin.vo.BaseRequestParamVo;
+import com.profession.data.crawl.professionCrawlAdmin.vo.RequestParamVo;
 
 /**
  * @ClassName: AddRequestParamVo
@@ -17,7 +17,7 @@ import com.profession.data.crawl.professionCrawlAdmin.vo.BaseRequestParamVo;
  * @date 2019年3月24日
  *
  */
-public class AddRequestParamVo extends BaseRequestParamVo {
+public class AddRequestParamVo extends RequestParamVo {
 
 	/**
 	 * @Fields field:field:{todo}
