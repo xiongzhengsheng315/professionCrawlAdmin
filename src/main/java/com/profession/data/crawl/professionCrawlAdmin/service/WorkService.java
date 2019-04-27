@@ -8,8 +8,7 @@
  */
 package com.profession.data.crawl.professionCrawlAdmin.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.profession.data.crawl.professionCrawlAdmin.vo.request.work.QueryListParam;
 import com.profession.data.crawl.professionCrawlAdmin.vo.response.work.ListWorkResponseVo;
 
@@ -27,8 +26,8 @@ public interface WorkService {
 	 * @Description: 查询职业列表
 	 * @param param 查询参数
 	 * @param @return 参数
-	 * @return List<ListWorkResponseVo> 返回类型
+	 * @return PageInfo<ListWorkResponseVo> 返回类型
 	 * @throws
 	 */
-	public List<ListWorkResponseVo> listWorkers(QueryListParam param);
+	public PageInfo<ListWorkResponseVo> listWorkers(QueryListParam param);
 }

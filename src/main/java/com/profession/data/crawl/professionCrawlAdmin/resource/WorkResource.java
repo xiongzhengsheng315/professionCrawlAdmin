@@ -8,13 +8,15 @@
  */
 package com.profession.data.crawl.professionCrawlAdmin.resource;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.profession.data.crawl.professionCrawlAdmin.service.WorkService;
 import com.profession.data.crawl.professionCrawlAdmin.vo.ResponseVo;
 import com.profession.data.crawl.professionCrawlAdmin.vo.request.work.QueryListParam;
@@ -28,6 +30,7 @@ import com.profession.data.crawl.professionCrawlAdmin.vo.response.work.ListWorkR
  *
  */
 @RestController
+@RequestMapping("/worker")
 public class WorkResource {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,14 +47,15 @@ public class WorkResource {
 	 * @return ResponseVo<?> 返回类型
 	 * @throws
 	 */
-	public ResponseVo<?> listWorks(QueryListParam param){
-		List<ListWorkResponseVo> listWorkResponseVos = null;
+	@PostMapping("/list")
+	public ResponseVo<?> listWorks(@RequestBody QueryListParam param){
+		PageInfo<ListWorkResponseVo> pageInfo = null;
 		try {
-			listWorkResponseVos = workService.listWorkers(param);
+			pageInfo = workService.listWorkers(param);
 		} catch (Exception e) {
 			logger.error("查询职业列表异常!", e);
 			return ResponseVo.ofFailure("查询职业列表异常,请联系管理员!");
 		}
-		return ResponseVo.ofSuccess(listWorkResponseVos);
+		return ResponseVo.ofSuccess(pageInfo);
 	}
 }
