@@ -1,11 +1,13 @@
 $(function(){
 	//初始化
-	obj.init({"pageSize":10,"pageNo":1});
+	obj.init({"pageSize": obj.pageSize, "pageNo": obj.pageNo});
 	
 	obj.bindEvent();
 });
 
 var obj = {
+	"pageSize":10,
+	"pageNo":1,
 	"init" : function(paramObj){
 		$.ajax({
 			method : "POST",
@@ -39,17 +41,26 @@ var obj = {
 					html.push('</tr>');
 				}
 				$("#workListDom").html(html.join(""));
-				
-				$("#pagination-demo").twbsPagination({
-		            totalPages:10,  //总页数
+				$("#pagination").remove();
+				$("#pagerDom").append('<ul id="pagination" class="pagination"></ul>');
+				$("#totalRecord").html(dataObj.data.total);
+				$("#pagination").twbsPagination({
+		            totalPages:dataObj.data.pageSize,  //总页数
 		            hideOnlyOnePage: true,  //当总数为一页时，不显示分页
-		            visiblePages:7,  //设置最多显示的页码数（例如有20页，当前第1页，则显示1 - 7页）
-		            currentPage:1,  //设置当前的页码
+		            visiblePages:7,  //设置最多显示的页码数
+		            currentPage:dataObj.data.pageNum,  //设置当前的页码
 		            first:'首页',
 		            last:'末页',
 		            prev:'上一页',
 		            next:'下一页',
-		            href:"/bug/myNote?pageNum={{number}}"
+		            onPageClick:function(event, page){
+		            	obj.pageNo = page;
+		            	var paramObj = {
+		            		"pageSize" : obj.pageSize,
+				    		"pageNo": obj.pageNo
+		            	};
+		            	obj.init(paramObj);
+		            }
 		        });
 			}
 		});
@@ -64,15 +75,17 @@ var obj = {
 			if(status != "") {
 				paramObj["status"] = status;
 			}
-			if(!startDateMin) {
+			if(startDateMin) {
 				paramObj["startDateMin"] = startDateMin;
 			}
-			if(!startDateMax) {
+			if(startDateMax) {
 				paramObj["startDateMax"] = startDateMax;
 			}
-			if(!jobName) {
+			if(jobName) {
 				paramObj["jobName"] = jobName;
 			}
+			paramObj["pageSize"] = obj.pageSize;
+			paramObj["pageNo"] = obj.pageNo
 			obj.init(paramObj);
 		});
 	}

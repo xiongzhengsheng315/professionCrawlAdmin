@@ -73,16 +73,16 @@ public class WorkServiceImpl implements WorkService {
 		if(param.getStartDateMax() != null){
 			criteria.andGreaterThan("createTime", param.getStartDateMax());
 		}
-		int totalRecord = workMapper.selectCountByExample(example);
 		PageHelper.startPage(param.getPageNo(), param.getPageSize());
 		List<Work> works = workMapper.selectByExample(example);
-		if(CollectionUtils.isEmpty(works)) {
+		PageInfo<Work> pageInfo = new PageInfo<Work>(works);
+		if(pageInfo == null || CollectionUtils.isEmpty(pageInfo.getList())) {
 			return null;
 		}
 		List<ListWorkResponseVo> responseVos = new ArrayList<>();
 		ListWorkResponseVo responseVo = null;
 		Map<Integer, String> map = WorkStatusConstant.getStatusMsg();
-		for (Work work : works) {
+		for (Work work : pageInfo.getList()) {
 			responseVo = new ListWorkResponseVo();
 			BeanUtils.copyProperties(work, responseVo);
 			//
@@ -98,7 +98,12 @@ public class WorkServiceImpl implements WorkService {
 			responseVo.setUpdateTime(DateUtil.convertDateToString(work.getUpdateTime()));
 			responseVos.add(responseVo);
 		}
-		return new PageInfo<>(responseVos);
+		PageInfo<ListWorkResponseVo> resultPageInfo = new PageInfo<ListWorkResponseVo>();
+		resultPageInfo.setTotal(pageInfo.getTotal());
+		resultPageInfo.setPageNum(pageInfo.getPageNum());
+		resultPageInfo.setPageSize(pageInfo.getPages());
+		resultPageInfo.setList(responseVos);
+		return resultPageInfo;
 	}
 
 }
