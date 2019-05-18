@@ -14,12 +14,12 @@ var obj = {
 			dataType : "json",
 			contentType: "application/json;charset-UTF-8",
 			data : JSON.stringify(paramObj),
-			success : function(data){
-				if(!data || data.status != 200) {
-					alert(data.errMsg);
+			success : function(dataObj){
+				if(!dataObj || dataObj.status != 200) {
+					alert(dataObj.errMsg);
 					return false;
 				}
-				var arr = data.data;
+				var arr = dataObj.data.list;
 				var html = [];
 				for(var i = 0, len = arr.length; i < len; i++) {
 					var obj = arr[i];
@@ -39,6 +39,18 @@ var obj = {
 					html.push('</tr>');
 				}
 				$("#workListDom").html(html.join(""));
+				
+				$("#pagination-demo").twbsPagination({
+		            totalPages:10,  //总页数
+		            hideOnlyOnePage: true,  //当总数为一页时，不显示分页
+		            visiblePages:7,  //设置最多显示的页码数（例如有20页，当前第1页，则显示1 - 7页）
+		            currentPage:1,  //设置当前的页码
+		            first:'首页',
+		            last:'末页',
+		            prev:'上一页',
+		            next:'下一页',
+		            href:"/bug/myNote?pageNum={{number}}"
+		        });
 			}
 		});
 	},
