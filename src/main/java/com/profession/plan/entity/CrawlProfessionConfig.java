@@ -40,24 +40,20 @@ public class CrawlProfessionConfig implements Serializable {
 	/**
 	 * 爬虫职位
 	 */
-	@Column(name = "name")
-	private String name;
+	@Column(name = "job_name")
+	private String jobName;
 	
 	/**
-	 * 父id
+	 * 行业id
 	 */
-	@Column(name = "pid")
-	private Long pid;
+	@Column(name = "category_id")
+	private String categoryId;
 	
-	/**
-	 * 层级 0:第一级;1:第二级;3:第三级
-	 */
-	@Column(name = "level")
-	private Integer level;
 	
 	/**
 	 * 是否删除  false:不删除;true:删除
 	 */
+	@Column(name = "is_delete")
 	private Boolean delete;
 	
 	/**
@@ -92,28 +88,20 @@ public class CrawlProfessionConfig implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getJobName() {
+		return jobName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
-	public Long getPid() {
-		return pid;
+	public String getCategoryId() {
+		return categoryId;
 	}
 
-	public void setPid(Long pid) {
-		this.pid = pid;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public Boolean getDelete() {
@@ -147,7 +135,7 @@ public class CrawlProfessionConfig implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
 	public Integer getVersion() {
 		return version;
 	}

@@ -101,7 +101,7 @@ public class WorkServiceImpl implements WorkService {
 		PageInfo<ListWorkResponseVo> resultPageInfo = new PageInfo<ListWorkResponseVo>();
 		resultPageInfo.setTotal(pageInfo.getTotal());
 		resultPageInfo.setPageNum(pageInfo.getPageNum());
-		resultPageInfo.setPageSize(pageInfo.getPages());
+		resultPageInfo.setPages(pageInfo.getPages());
 		resultPageInfo.setList(responseVos);
 		return resultPageInfo;
 	}

@@ -8,8 +8,7 @@
  */
 package com.profession.plan.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.profession.plan.entity.CrawlProfessionConfig;
 import com.profession.plan.vo.request.crawlConfig.ListRequestParamVo;
 
@@ -26,8 +25,8 @@ public interface CrawlProfessionConfigService {
 	 * @Title: listCrawlProfessionConfigs
 	 * @Description: 查询爬取职业列表
 	 * @param requestParamVo 爬虫状态
-	 * @return List<CrawlProfessionConfig> 返回类型
+	 * @return PageInfo<CrawlProfessionConfig> 返回类型
 	 * @throws
 	 */
-	public List<CrawlProfessionConfig> listCrawlProfessionConfigs(ListRequestParamVo requestParamVo);
+	public PageInfo<CrawlProfessionConfig> listCrawlProfessionConfigs(ListRequestParamVo requestParamVo);
 }

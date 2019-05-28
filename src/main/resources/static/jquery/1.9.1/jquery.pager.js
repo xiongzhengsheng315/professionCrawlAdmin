@@ -86,8 +86,8 @@
 
     // renders and returns a 'specialized' button, ie 'next', 'previous' etc. rather than a page number button
     function renderButton(buttonLabel, pagenumber, pagecount, buttonClickCallback) {
-
-        var $Button = $('<li class="pgNext">' + buttonLabel + '</li>');
+    	var pageLabelObj = {"first" : "首页", "prev" : "上一页", "next" : "下一页", "last" : "最后一页"};
+        var $Button = $('<li class="pgNext">' + pageLabelObj[buttonLabel] + '</li>');
 
         var destPage = 1;
 
