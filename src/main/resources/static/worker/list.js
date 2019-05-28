@@ -1,11 +1,11 @@
 $(function(){
 	//初始化
-	obj.init({"pageSize": obj.pageSize, "pageNo": obj.pageNo});
+	workObj.init({"pageSize": workObj.pageSize, "pageNo": workObj.pageNo});
 	
-	obj.bindEvent();
+	workObj.bindEvent();
 });
 
-var obj = {
+var workObj = {
 	"pageSize":10,
 	"pageNo":1,
 	"init" : function(paramObj){
@@ -54,12 +54,12 @@ var obj = {
 		            prev:'上一页',
 		            next:'下一页',
 		            onPageClick:function(event, page){
-		            	obj.pageNo = page;
+		            	workObj.pageNo = page;
 		            	var paramObj = {
-		            		"pageSize" : obj.pageSize,
-				    		"pageNo": obj.pageNo
+		            		"pageSize" : workObj.pageSize,
+				    		"pageNo": workObj.pageNo
 		            	};
-		            	obj.init(paramObj);
+		            	workObj.init(paramObj);
 		            }
 		        });
 			}
@@ -84,9 +84,9 @@ var obj = {
 			if(jobName) {
 				paramObj["jobName"] = jobName;
 			}
-			paramObj["pageSize"] = obj.pageSize;
-			paramObj["pageNo"] = obj.pageNo
-			obj.init(paramObj);
+			paramObj["pageSize"] = workObj.pageSize;
+			paramObj["pageNo"] = workObj.pageNo
+			workObj.init(paramObj);
 		});
 	}
 };
