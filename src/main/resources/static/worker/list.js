@@ -1,13 +1,15 @@
 $(function(){
 	//初始化
-	workObj.init({"pageSize": workObj.pageSize, "pageNo": workObj.pageNo});
+	workObj.init(workObj.condition);
 	
 	workObj.bindEvent();
 });
 
 var workObj = {
-	"pageSize":10,
-	"pageNo":1,
+	"condition" : {
+		"pageSize":10,
+		"pageNo":1
+	},
 	"init" : function(paramObj){
 		$.ajax({
 			method : "POST",
@@ -44,24 +46,15 @@ var workObj = {
 				$("#pagination").remove();
 				$("#pagerDom").append('<ul id="pagination" class="pagination"></ul>');
 				$("#totalRecord").html(dataObj.data.total);
-				$("#pagination").twbsPagination({
-		            totalPages:dataObj.data.pageSize,  //总页数
-		            hideOnlyOnePage: true,  //当总数为一页时，不显示分页
-		            visiblePages:7,  //设置最多显示的页码数
-		            currentPage:dataObj.data.pageNum,  //设置当前的页码
-		            first:'首页',
-		            last:'末页',
-		            prev:'上一页',
-		            next:'下一页',
-		            onPageClick:function(event, page){
-		            	workObj.pageNo = page;
-		            	var paramObj = {
-		            		"pageSize" : workObj.pageSize,
-				    		"pageNo": workObj.pageNo
-		            	};
-		            	workObj.init(paramObj);
-		            }
-		        });
+				$("#pager").pager({
+                    pagenumber: dataObj.data.pageNum, 
+                    pagecount:dataObj.data.pageSize,
+                    totalcount:dataObj.data.total,
+                    buttonClickCallback: function(pageclickednumber){
+                    	workObj.condition.pageNo = pageclickednumber;
+                    	workObj.init(workObj.condition);
+                    }
+                });
 			}
 		});
 	},
@@ -71,22 +64,19 @@ var workObj = {
 			var startDateMin = $("#startDateMin").val();
 			var startDateMax = $("#startDateMax").val();
 			var jobName = $("#jobName").val();
-			var paramObj = {};
 			if(status != "") {
-				paramObj["status"] = status;
+				workObj.condition["status"] = status;
 			}
 			if(startDateMin) {
-				paramObj["startDateMin"] = startDateMin;
+				workObj.condition["startDateMin"] = startDateMin;
 			}
 			if(startDateMax) {
-				paramObj["startDateMax"] = startDateMax;
+				workObj.condition["startDateMax"] = startDateMax;
 			}
 			if(jobName) {
-				paramObj["jobName"] = jobName;
+				workObj.condition["jobName"] = jobName;
 			}
-			paramObj["pageSize"] = workObj.pageSize;
-			paramObj["pageNo"] = workObj.pageNo
-			workObj.init(paramObj);
+			workObj.init(workObj.condition);
 		});
 	}
 };
