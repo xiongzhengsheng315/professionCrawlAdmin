@@ -9,7 +9,9 @@
 package com.profession.plan.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @ClassName: SkillController
@@ -53,7 +55,8 @@ public class SkillController {
 	 * @throws
 	 */
 	@RequestMapping("/goEdit")
-	public String goEdit(){
+	public String goEdit(Model model,@RequestParam String skillId){
+		model.addAttribute("id", skillId);
 		return "/skill/editSkill";
 	}
 }

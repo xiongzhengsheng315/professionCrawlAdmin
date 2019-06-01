@@ -94,6 +94,19 @@ public class SkillServiceImpl implements SkillService {
 		resultPageInfo.setList(responseVos);
 		return resultPageInfo;
 	}
+	
+	/**
+	 * @Title: findSkillById
+	 * @Description: 根据id查询工作技能
+	 * @param param 查询参数
+	 * @param @return 参数
+	 * @throws
+	 */
+	@Override
+	public Skill findSkillById(QueryListParam param) {
+		// TODO Auto-generated method stub
+		return skillMapper.selectByPrimaryKey(param.getId());
+	}
 
 	/**
 	 * @Title: delSkill
@@ -127,6 +140,25 @@ public class SkillServiceImpl implements SkillService {
 		skill.setUpdateTime(new Date());
 		skill.setDel(0);
 		skillMapper.insert(skill);
+	}
+
+	/**
+	 * @Title: editSkill
+	 * @Description: 修改工作技能
+	 * @param param 工作技能实体
+	 * @param @return 参数
+	 * @return 
+	 * @throws
+	 */
+	@Override
+	public void editSkill(QueryListParam param) {
+		// TODO Auto-generated method stub
+		Skill skill=new Skill();
+		skill.setId(param.getId());
+		skill.setName(param.getSkillName());
+		skill.setCategoryId(param.getCategoryId());
+		skill.setVersion(param.getVersion());
+		skillMapper.updateByPrimaryKeySelective(skill);
 	}
 
 }

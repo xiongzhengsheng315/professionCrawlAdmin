@@ -33,6 +33,16 @@ public interface SkillService {
 	public PageInfo<ListSkillResponseVo> listSkills(QueryListParam param);
 	
 	/**
+	 * @Title: findSkillById
+	 * @Description: 根据id查询工作技能
+	 * @param param 查询参数
+	 * @param @return 参数
+	 * @return 
+	 * @throws
+	 */
+	public Skill findSkillById(QueryListParam param);
+	
+	/**
 	 * @Title: delSkill
 	 * @Description: 根据id删除工作技能
 	 * @param param 查询参数
@@ -51,4 +61,14 @@ public interface SkillService {
 	 * @throws
 	 */
 	public void addSkill(QueryListParam param);
+	
+	/**
+	 * @Title: editSkill
+	 * @Description: 修改工作技能
+	 * @param param 工作技能实体
+	 * @param @return 参数
+	 * @return 
+	 * @throws
+	 */
+	public void editSkill(QueryListParam param);
 }

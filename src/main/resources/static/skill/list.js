@@ -36,7 +36,7 @@ $(function(){
 						html.push('	<td>'+obj.categoryName+'</td>');
 						html.push('	<td>'+'介绍'+'</td>');
 						html.push('	<td>'+obj.updateTime+'</td>');
-						html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
+						html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="editSkill('+obj.id+')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
 						html.push('</tr>');
 					}
 					$("#skillListDom").html(html.join(""));
@@ -88,7 +88,7 @@ $(function(){
 					html.push('	<td>'+obj.categoryName+'</td>');
 					html.push('	<td>'+'介绍'+'</td>');
 					html.push('	<td>'+obj.updateTime+'</td>');
-					html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
+					html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="editSkill('+obj.id+')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
 					html.push('</tr>');
 				}
 				$("#skillListDom").html(html.join(""));
@@ -141,7 +141,7 @@ $(function(){
 						html.push('	<td>'+obj.categoryName+'</td>');
 						html.push('	<td>'+'介绍'+'</td>');
 						html.push('	<td>'+obj.updateTime+'</td>');
-						html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
+						html.push('	<td class="f-14 td-manage"> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="editSkill('+obj.id+')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" href="javascript:;" onclick="delSkill('+obj.id+')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>');
 						html.push('</tr>');
 					}
 					$("#skillListDom").html(html.join(""));
@@ -206,4 +206,12 @@ $(function(){
 		} else{  
 			return false;   
 		}
+	}
+	function editSkill(sid){
+		layer.open({
+			type: 2,
+			area: ['500px', '300px'], 
+			title: "修改工作技能",
+			content: "/skill/goEdit?skillId="+sid
+		});
 	}

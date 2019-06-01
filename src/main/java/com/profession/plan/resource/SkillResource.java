@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
+import com.profession.plan.entity.Skill;
 import com.profession.plan.service.SkillService;
 import com.profession.plan.vo.ResponseVo;
 import com.profession.plan.vo.request.work.QueryListParam;
@@ -60,6 +61,27 @@ public class SkillResource {
 		}
 		return ResponseVo.ofSuccess(pageInfo);
 	}
+	/**
+	 * 
+	 * @Title: findSkillById
+	 * @Description: 根据id查询工作技能
+	 * @param param
+	 * @param @return 参数
+	 * @return ResponseVo<?> 返回类型
+	 * @throws
+	 */
+	@PostMapping("/findSkillById")
+	@ResponseBody
+	public ResponseVo<?> findSkillById(@RequestBody QueryListParam param){
+		Skill skill = null;
+		try {
+			skill = skillService.findSkillById(param);
+		} catch (Exception e) {
+			logger.error("查询工作技能异常!", e);
+			return ResponseVo.ofFailure("查询工作技能异常,请联系管理员!");
+		}
+		return ResponseVo.ofSuccess(skill);
+	}
 	
 	/**
 	 * 
@@ -101,5 +123,26 @@ public class SkillResource {
 			return ResponseVo.ofFailure("添加工作技能异常!");
 		}
 		return ResponseVo.ofSuccess("添加工作技能成功!");
+	}
+	
+	/**
+	 * 
+	 * @Title: editSkill
+	 * @Description: 修改工作技能
+	 * @param param
+	 * @param @return 参数
+	 * @return ResponseVo<?> 返回类型
+	 * @throws
+	 */
+	@PostMapping("/editSkill")
+	@ResponseBody
+	public ResponseVo<?> editSkill(@RequestBody QueryListParam param){
+		try {
+			skillService.editSkill(param);
+		} catch (Exception e) {
+			logger.error("修改工作技能异常!", e);
+			return ResponseVo.ofFailure("修改工作技能异常!");
+		}
+		return ResponseVo.ofSuccess("修改工作技能成功!");
 	}
 }

@@ -31,6 +31,7 @@
 <body>
 <article class="page-container">
 	<form class="form form-horizontal" id="form-skill-add">
+		<input type="hidden" id="skillId" name="skillId" th:value="${id}" />
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>能力名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
@@ -73,11 +74,35 @@
 <script type="text/javascript" src="/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="/jquery/1.9.1/jquery.twbsPagination.js"></script>
 <script type="text/javascript">
+var categoryIdAll;
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
+	});
+	var paramSkill={};
+	var sid = $("#skillId").val();
+	paramSkill["id"]=sid;
+	$.ajax({
+		method : "POST",
+		url : "/skillResource/findSkillById",
+		async : true,
+		dataType : "json",
+		contentType: "application/json;charset-UTF-8",
+		data : JSON.stringify(paramSkill),
+		success : function(dataObj){
+			if(!dataObj || dataObj.status != 200) {
+				alert(dataObj.errMsg);
+				return false;
+			}
+			var arr=dataObj.data;
+			if(arr!=null){
+				categoryIdAll=arr.categoryId;
+				$("#name").val()=arr.name;
+				$("#version").val()=arr.version;
+			}
+		}
 	});
 	$.ajax({
 		method : "POST",
@@ -95,7 +120,11 @@ $(function(){
 				var len=arr.length;
 				for(var i = 0; i < len; i++){
 					var obj = arr[i];
-					$("#categoryId").append('<option value="'+obj.id+'">'+obj.name+'</option>');
+					if(categoryIdAll==obj.id){
+						$("#categoryId").append('<option value="'+obj.id+'" selected>'+obj.name+'</option>');
+					}else{
+						$("#categoryId").append('<option value="'+obj.id+'">'+obj.name+'</option>');
+					}
 				}
 			}
 		}
@@ -104,6 +133,7 @@ $(function(){
 });
 function saveSkill(){
 	var paramObj = {};
+	var id=$("#skillId").val()
 	var name = $("#name").val();
 	var categoryId = $("#categoryId").val();
 	var version = $("#version").val();
@@ -119,12 +149,13 @@ function saveSkill(){
 		alert("版本号不能为空");
 		return false;
 	}
+	paramObj["id"]=id;
 	paramObj["skillName"]=name;
 	paramObj["categoryId"]=categoryId;
 	paramObj["version"]=version;
 	$.ajax({
 		method : "POST",
-		url : "/skillResource/addSkill",
+		url : "/skillResource/editSkill",
 		async : true,
 		dataType : "json",
 		contentType: "application/json;charset-UTF-8",
@@ -134,7 +165,7 @@ function saveSkill(){
 				alert(dataObj.errMsg);
 				return false;
 			}
-			alert("添加成功");
+			alert("修改成功");
 		}
 	});
 	var index=parent.layer.getFrameIndex(window.name);
