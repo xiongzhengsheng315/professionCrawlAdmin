@@ -33,7 +33,7 @@ public class SkillController {
 	 */
 	@RequestMapping("/list")
 	public String list(){
-		return "/skill/list";
+		return "skill/list";
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class SkillController {
 	 */
 	@RequestMapping("/goAdd")
 	public String goAdd(){
-		return "/skill/addSkill";
+		return "skill/addSkill";
 	}
 	/**
 	 * @Title: goEdit
@@ -57,6 +57,6 @@ public class SkillController {
 	@RequestMapping("/goEdit")
 	public String goEdit(Model model,@RequestParam String skillId){
 		model.addAttribute("id", skillId);
-		return "/skill/editSkill";
+		return "skill/editSkill";
 	}
 }

@@ -30,6 +30,6 @@ public class WorkController {
 	 */
 	@RequestMapping("/list")
 	public String list(){
-		return "/work/list";
+		return "work/list";
 	}
 }

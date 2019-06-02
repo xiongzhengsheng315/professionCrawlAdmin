@@ -31,6 +31,6 @@ public class CrawlProfessionConfigController {
 	 */
 	@RequestMapping("/list")
 	public String list(){
-		return "/crawl_config/list";
+		return "crawl_config/list";
 	}
 }
