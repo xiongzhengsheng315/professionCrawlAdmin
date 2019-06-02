@@ -10,6 +10,7 @@ package com.profession.plan.vo.request.work;
 
 import java.util.Date;
 
+import com.profession.plan.entity.Skill;
 import com.profession.plan.vo.RequestParamVo;
 
 /**
@@ -45,6 +46,25 @@ public class QueryListParam extends RequestParamVo {
 	 * 职业名称
 	 */
 	private String jobName;
+	/**
+	 * 工作技能名称
+	 */
+	private String skillName;
+	
+	/**
+	 * id
+	 */
+	private Long id;
+	
+	/**
+	 * 职业分类id
+	 */
+	private Long categoryId;
+	
+	/**
+	 * 版本号
+	 */
+	private String version;
 
 	public Integer getStatus() {
 		return status;
@@ -77,4 +97,37 @@ public class QueryListParam extends RequestParamVo {
 	public void setJobName(String jobName) {
 		this.jobName = jobName;
 	}
+
+	public String getSkillName() {
+		return skillName;
+	}
+
+	public void setSkillName(String skillName) {
+		this.skillName = skillName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	
 }
