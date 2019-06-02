@@ -54,7 +54,7 @@ public class Skill implements Serializable {
 	 * 删除标记
 	 */
 	@Column(name = "del")
-	private int del;
+	private Integer del;
 	
 	
 	/**
@@ -99,11 +99,11 @@ public class Skill implements Serializable {
 		this.name = name;
 	}
 
-	public int getDel() {
+	public Integer getDel() {
 		return del;
 	}
 
-	public void setDel(int del) {
+	public void setDel(Integer del) {
 		this.del = del;
 	}
 
